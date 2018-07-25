@@ -2,6 +2,12 @@
 
 
 [[projects]]
+  branch = "master"
+  name = "github.com/xrash/smetrics"
+  packages = ["."]
+  revision = "a3153f7040e90324c58c6287535e26a0ac5c1cc1"
+
+[[projects]]
   name = "golang.org/x/text"
   packages = [
     "internal/gen",
@@ -17,6 +23,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "2a93e0b45db0b97e2897b7021537fb8daea56ed02e0358312344615ee0609cb9"
+  inputs-digest = "eacb320f711de661f0274a6d7b120ed34e9f56ff9a8e8591736b2927b6a08cf8"
   solver-name = "gps-cdcl"
   solver-version = 1
