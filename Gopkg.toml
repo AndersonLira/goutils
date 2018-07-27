@@ -26,6 +26,10 @@
 
 
 [[constraint]]
+  branch = "master"
+  name = "github.com/xrash/smetrics"
+
+[[constraint]]
   name = "golang.org/x/text"
   version = "0.3.0"
 
