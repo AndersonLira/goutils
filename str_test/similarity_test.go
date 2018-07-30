@@ -31,3 +31,13 @@ func TestSimilarityNormalized(t *testing.T) {
 	}
 
 }
+
+func TestSimilarityTolerance(t *testing.T) {
+
+	per := str.Similarity("es", "espanhola, lingua")
+
+	if 75 < int(per) {
+		t.Errorf("Similarity should less than 75, but %.2f", per)
+	}
+
+}
