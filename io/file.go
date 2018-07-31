@@ -29,7 +29,12 @@ func ReadFile(fileName string) (content string, err error) {
 //AppendFile writes on file increasing its content
 func AppendFile(fileName string, content string) error {
 	file, err := os.OpenFile(fileName, os.O_WRONLY|os.O_APPEND, 0644)
-
+	if err != nil {
+		file, err = os.Create(fileName)
+		if err != nil {
+			return err
+		}
+	}
 	defer file.Close()
 
 	if err != nil {

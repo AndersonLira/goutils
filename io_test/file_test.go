@@ -1,6 +1,9 @@
 package io_test
 
 import (
+	"fmt"
+	"math/rand"
+	"strings"
 	"testing"
 
 	"github.com/andersonlira/goutils/io"
@@ -47,33 +50,28 @@ func TestWriteAndReadFilef(t *testing.T) {
 }
 
 func TestAppendFile(t *testing.T) {
-	fileName := "/tmp/201831071529TestWriteFile.txt"
-	content := ""
-	io.WriteFile(fileName, content)
+	r := rand.New(rand.NewSource(99))
 
-	content = "Content"
+	fileName := fmt.Sprintf("/tmp/%dTestAppendFile.txt", r.Int())
+
+	content := "Content"
 	err := io.AppendFile(fileName, content)
 
 	contentRead, err := io.ReadFile(fileName)
 
-	if content != contentRead {
-		t.Errorf("Content should be %s, but %s", content, contentRead)
-	}
-	err = io.AppendFile(fileName, content)
-
-	contentRead, err = io.ReadFile(fileName)
-
 	if err != nil {
 		t.Error("Error was not expect here, but", err)
 	}
-	if (content + content) != contentRead {
-		t.Errorf("Content should be %s, but %s", content+content, contentRead)
+	if !strings.Contains(contentRead, content) {
+		t.Errorf("Content should be %s, but %s", content, contentRead)
 	}
 
 }
 
 func TestAppendFilef(t *testing.T) {
-	fileName := "/tmp/201831071529TestWriteFile.txt"
+	r := rand.New(rand.NewSource(99))
+
+	fileName := fmt.Sprintf("/tmp/%dTestAppendFile.txt", r.Int())
 	content := "Content Test %s %d"
 	io.WriteFile(fileName, "")
 
