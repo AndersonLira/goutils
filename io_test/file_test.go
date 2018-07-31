@@ -26,6 +26,26 @@ func TestWriteAndReadFile(t *testing.T) {
 	}
 }
 
+func TestWriteAndReadFilef(t *testing.T) {
+	fileName := "/tmp/201831071529TestWriteFile.txt"
+	content := "Content Test %s %d"
+	err := io.WriteFilef(fileName, content, "A", 1)
+
+	if err != nil {
+		t.Error("Error was not expect here, but", err)
+	}
+	content = "Content Test A 1"
+	contentRead, err := io.ReadFile(fileName)
+
+	if err != nil {
+		t.Error("Error was not expect here, but", err)
+	}
+
+	if content != contentRead {
+		t.Errorf("Content should be %s, but %s", content, contentRead)
+	}
+}
+
 func TestAppendFile(t *testing.T) {
 	fileName := "/tmp/201831071529TestWriteFile.txt"
 	content := ""
@@ -50,4 +70,19 @@ func TestAppendFile(t *testing.T) {
 		t.Errorf("Content should be %s, but %s", content+content, contentRead)
 	}
 
+}
+
+func TestAppendFilef(t *testing.T) {
+	fileName := "/tmp/201831071529TestWriteFile.txt"
+	content := "Content Test %s %d"
+	io.WriteFile(fileName, "")
+
+	io.AppendFilef(fileName, content, "A", 1)
+	io.AppendFilef(fileName, content, "B", 2)
+
+	contentRead, _ := io.ReadFile(fileName)
+
+	if "Content Test A 1Content Test B 2" != contentRead {
+		t.Errorf("Content should be 'Content Test A 1Content Test B 2', but %s", contentRead)
+	}
 }

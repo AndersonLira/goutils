@@ -1,6 +1,7 @@
 package io
 
 import (
+	"fmt"
 	"io/ioutil"
 	"os"
 )
@@ -11,6 +12,12 @@ func WriteFile(fileName string, content string) error {
 	b := []byte(content)
 	err := ioutil.WriteFile(fileName, b, 0644)
 	return err
+}
+
+//WriteFilef writes on file formatting content
+func WriteFilef(fileName string, content string, args ...interface{}) error {
+	s := fmt.Sprintf(content, args...)
+	return WriteFile(fileName, s)
 }
 
 //ReadFile reads a file and return its content as string
@@ -34,4 +41,10 @@ func AppendFile(fileName string, content string) error {
 		return err
 	}
 	return nil
+}
+
+//AppendFilef appends text on file formatting content
+func AppendFilef(fileName string, content string, args ...interface{}) error {
+	s := fmt.Sprintf(content, args...)
+	return AppendFile(fileName, s)
 }
