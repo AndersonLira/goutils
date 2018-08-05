@@ -40,4 +40,15 @@ func TestSimilarityTolerance(t *testing.T) {
 		t.Errorf("Similarity should less than 75, but %.2f", per)
 	}
 
+	per = str.Similarity("1º ano EF", "2º ano EF")
+
+	if 95 < int(per) {
+		t.Errorf("Similarity should less than 95, but %.2f", per)
+	}
+	per = str.Similarity("1º ano EF", "5º ano EF")
+
+	if 95 < int(per) {
+		t.Errorf("Similarity should less than 95, but %.2f", per)
+	}
+
 }
