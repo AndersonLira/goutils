@@ -10,17 +10,21 @@ import (
 type Matrix struct {
 	Width     int
 	Separator rune
+	LineColor Color
+	TextColor Color
 	line      *string
 }
 
 //Println prints content formatted
 func (m Matrix) Println(s string) {
 	s = strPad(s, m.Width, " ", "RIGHT")[0 : m.Width-3]
+	fmt.Print(m.TextColor)
 	fmt.Println(fmt.Sprintf("%s %s%s", string(m.Separator), s, string(m.Separator)))
 }
 
 //Line prints a line with Width width
 func (m Matrix) Line() {
+	fmt.Print(m.LineColor)
 	fmt.Println(m.getLine())
 }
 
