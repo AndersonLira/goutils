@@ -3,10 +3,10 @@ package io_test
 import (
 	"fmt"
 	"math/rand"
+	"os"
 	"strings"
 	"testing"
 	"time"
-	"runtime"
 	"github.com/andersonlira/goutils/io"
 )
 
@@ -86,10 +86,7 @@ func TestAppendFilef(t *testing.T) {
 
 func getFileName() (string){
 	r := rand.New(rand.NewSource(time.Now().UnixNano()))
-	prefix := "/tmp/"
-	if runtime.GOOS == "windows" {
-		prefix = "d:\\tmp\\"
-	}
-	fileName := fmt.Sprintf("%s%dTestAppendFile.txt",prefix, r.Int())
+	prefix := os.TempDir()
+	fileName := fmt.Sprintf("%s%s%dTestAppendFile.txt",prefix,string(os.PathSeparator), r.Int())
 	return fileName
 }
