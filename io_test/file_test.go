@@ -5,12 +5,13 @@ import (
 	"math/rand"
 	"strings"
 	"testing"
-
+	"time"
+	"runtime"
 	"github.com/andersonlira/goutils/io"
 )
 
 func TestWriteAndReadFile(t *testing.T) {
-	fileName := "/tmp/201831071529TestWriteFile.txt"
+	fileName := getFileName()
 	content := "Content Test"
 	err := io.WriteFile(fileName, content)
 
@@ -30,7 +31,7 @@ func TestWriteAndReadFile(t *testing.T) {
 }
 
 func TestWriteAndReadFilef(t *testing.T) {
-	fileName := "/tmp/201831071529TestWriteFile.txt"
+	fileName := getFileName()
 	content := "Content Test %s %d"
 	err := io.WriteFilef(fileName, content, "A", 1)
 
@@ -50,9 +51,8 @@ func TestWriteAndReadFilef(t *testing.T) {
 }
 
 func TestAppendFile(t *testing.T) {
-	r := rand.New(rand.NewSource(99))
 
-	fileName := fmt.Sprintf("/tmp/%dTestAppendFile.txt", r.Int())
+	fileName := getFileName()
 
 	content := "Content"
 	err := io.AppendFile(fileName, content)
@@ -69,9 +69,8 @@ func TestAppendFile(t *testing.T) {
 }
 
 func TestAppendFilef(t *testing.T) {
-	r := rand.New(rand.NewSource(99))
 
-	fileName := fmt.Sprintf("/tmp/%dTestAppendFile.txt", r.Int())
+	fileName := getFileName()
 	content := "Content Test %s %d"
 	io.WriteFile(fileName, "")
 
@@ -83,4 +82,14 @@ func TestAppendFilef(t *testing.T) {
 	if "Content Test A 1Content Test B 2" != contentRead {
 		t.Errorf("Content should be 'Content Test A 1Content Test B 2', but %s", contentRead)
 	}
+}
+
+func getFileName() (string){
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	prefix := "/tmp/"
+	if runtime.GOOS == "windows" {
+		prefix = "d:\\tmp\\"
+	}
+	fileName := fmt.Sprintf("%s%dTestAppendFile.txt",prefix, r.Int())
+	return fileName
 }
