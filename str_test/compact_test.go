@@ -6,7 +6,7 @@ import (
 	"github.com/andersonlira/goutils/str"
 )
 
-func TestNewUUID(t *testing.T) {
+func TestCompact(t *testing.T) {
 	s := `
 		test with spaces
 			tabs and
