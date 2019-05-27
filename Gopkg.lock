@@ -3,11 +3,14 @@
 
 [[projects]]
   branch = "master"
+  digest = "1:85ceb7046447e3f5cf21c621ec137b23eb8d02ae9b585dd5c22d65543a0f3020"
   name = "github.com/xrash/smetrics"
   packages = ["."]
+  pruneopts = "UT"
   revision = "a3153f7040e90324c58c6287535e26a0ac5c1cc1"
 
 [[projects]]
+  digest = "1:1093f2eb4b344996604f7d8b29a16c5b22ab9e1b25652140d3fede39f640d5cd"
   name = "golang.org/x/text"
   packages = [
     "internal/gen",
@@ -15,14 +18,19 @@
     "internal/ucd",
     "transform",
     "unicode/cldr",
-    "unicode/norm"
+    "unicode/norm",
   ]
-  revision = "f21a4dfb5e38f5895301dc265a8def02365cc3d0"
-  version = "v0.3.0"
+  pruneopts = "UT"
+  revision = "342b2e1fbaa52c93f31447ad2c6abc048c63e475"
+  version = "v0.3.2"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "0fc4e4141f0534454a6dca49978571003898e429fcd627859594f1c98ffee97e"
+  input-imports = [
+    "github.com/xrash/smetrics",
+    "golang.org/x/text/transform",
+    "golang.org/x/text/unicode/norm",
+  ]
   solver-name = "gps-cdcl"
   solver-version = 1

@@ -17,7 +17,8 @@ const (
 	YELLOW Color = "\x1b[33;1m"
 
 	ClrB = "\x1b[34;1m"
-
+	BLUE = "\x1b[34;1m"
+	
 	ClrM          = "\x1b[35;1m"
 	MARGENT Color = "\x1b[35;1m"
 
@@ -28,4 +29,5 @@ const (
 	WHITE Color = "\x1b[37;1m"
 
 	ClrN = "\x1b[0m"
+	NONE Color = "\x1b[0m"
 )
