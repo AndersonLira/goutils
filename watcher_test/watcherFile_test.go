@@ -14,6 +14,7 @@ func TestStart(t *testing.T){
 
 
 	wf.Start()
+	io.WriteFile("./test.txt","content")
 	go io.WriteFile("./test.txt","content")
 
 	fileChanged := <-wf.FileChanged
@@ -25,11 +26,7 @@ func TestStart(t *testing.T){
 		t.Errorf("File changed should be test.txt but %s",fileChanged)
 	}
 
-	go os.Remove("./test.txt")
+	os.Remove("./test.txt")
 
-	fileChanged = <-wf.FileChanged
-	if fileChanged != "test.txt" {
-		t.Errorf("File changed should be test.txt but %s",fileChanged)
-	}
-
+	
 }

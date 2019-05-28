@@ -53,5 +53,7 @@ func (wf *WatcherFile) Start(){
 }
 
 func eventDetected(wf *WatcherFile,event fsnotify.Event){
-	wf.FileChanged <- event.Name
+	if(event.Op == fsnotify.Write){
+			wf.FileChanged <- event.Name
+	}
 }
