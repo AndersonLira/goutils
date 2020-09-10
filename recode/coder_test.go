@@ -1,4 +1,4 @@
-package gorecode
+package recode
 
 import (
 	"fmt"
