@@ -22,7 +22,7 @@ func MakeCoder(filePath string) (Coder, error) {
 	}
 
 	coder.FilePath = filePath
-	coder.Lines = strings.Split(content,"\n")
+	coder.Lines = strings.Split(content,"\r\n")
 	return coder,nil
 
 }
