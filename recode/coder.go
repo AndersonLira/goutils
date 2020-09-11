@@ -27,7 +27,7 @@ func MakeCoder(filePath string) (Coder, error) {
 
 }
 
-func (c *Coder) AddAfterLine(after,before,content string) bool {
+func (c *Coder) AddAfterLine(after string,before string,content ...string) bool {
 	newContent := []string{}
 	p0 := false
 	added := false
@@ -38,7 +38,9 @@ func (c *Coder) AddAfterLine(after,before,content string) bool {
 		if p0 {
 			if !added && (before == "" || strings.Contains(line,before))   {
 				added = true
-				newContent = append(newContent,content + "\n")
+				for _, cont := range content {
+					newContent = append(newContent,cont + "\n")
+				}
 			}
 		}
 		newContent = append(newContent,line + "\n")
