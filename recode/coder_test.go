@@ -15,6 +15,7 @@ func TestInit(t *testing.T){
 func ExampleAddAfterLine(){
 	coder, _ := MakeCoder("./_template.go")
 	coder.AddAfterLine("import (",")","\t\"net/http\"")
+	coder.AddAfterLine("func AnyFunction()","","\ts := \"S\"","\tfmt.Println(s)")
 
 	fmt.Println(coder.NewCodeContent())
 
@@ -28,6 +29,8 @@ func ExampleAddAfterLine(){
 	// )
 	//
 	// func AnyFunction() {
+	//	s := "S"
+	//	fmt.Println(s)	
 	// 	fmt.Println("Any")
 	// 	errors.New("New Error")
 	// }	

@@ -7,13 +7,14 @@ import
 
 )
 
-
+//Coder is the object that perform code modifications. Use MakeCoder to get a object reference
 type Coder struct {
 	FilePath string
 	Lines []string
 }
 
-
+//MakeCoder creates a object Coder and initialize it.
+//Param filePath the filePath
 func MakeCoder(filePath string) (Coder, error) {
 	content, err := io.ReadFile(filePath)
 	coder := Coder{}
@@ -27,15 +28,21 @@ func MakeCoder(filePath string) (Coder, error) {
 
 }
 
+//AddAfterLine add lines of code after giving expression
+//after string means the code will be written only after that occurrence is matched
+//before if before is diferent of '', the code will be write only that occurrence is matched
+//content the lines that should be added
 func (c *Coder) AddAfterLine(after string,before string,content ...string) bool {
 	newContent := []string{}
 	p0 := false
 	added := false
 	for _, line := range c.Lines {
-		if !p0 && strings.Contains(line,after){
-			p0 = true
-		}
-		if p0 {
+		line = strings.ReplaceAll(line,"\n","")
+		if !p0 {
+			if strings.Contains(line,after) {
+				p0 = true
+			}
+		} else {
 			if !added && (before == "" || strings.Contains(line,before))   {
 				added = true
 				for _, cont := range content {
@@ -50,6 +57,7 @@ func (c *Coder) AddAfterLine(after string,before string,content ...string) bool 
 	return added
 }
 
+//NewCodeContent returns the code changed 
 func (c *Coder) NewCodeContent() string {
 	aux := ""
 	for _, line := range c.Lines {
