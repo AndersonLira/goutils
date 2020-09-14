@@ -37,7 +37,7 @@ func (c *Coder) AddAfterLine(after string,before string,content ...string) bool 
 	p0 := false
 	added := false
 	for _, line := range c.Lines {
-		line = strings.ReplaceAll(line,"\n","")
+		line = strings.ReplaceAll(strings.ReplaceAll(line,"\n",""),"\r","")
 		if !p0 {
 			if strings.Contains(line,after) {
 				p0 = true
