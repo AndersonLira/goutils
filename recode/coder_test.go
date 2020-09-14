@@ -15,11 +15,28 @@ func TestInit(t *testing.T){
 func ExampleAddAfterLine(){
 	coder, _ := MakeCoder("./_template.go")
 	coder.AddAfterLine("import (",")","\t\"net/http\"")
-	coder.AddAfterLine("func AnyFunction()","","\ts := \"S\"","\tfmt.Println(s)")
 
 	fmt.Println(coder.NewCodeContent())
 
+	coder.AddAfterLine("func AnyFunction()","","\ts := \"S\"","\tfmt.Println(s)")
+
+	fmt.Print("***********\n",coder.NewCodeContent())
+
 	// Output:
+	// package gorecode
+	// 
+	// import (
+	// 	"fmt"
+	// 	"errors"
+	//	"net/http"
+	// )
+	//
+	// func AnyFunction() {
+	// 	fmt.Println("Any")
+	// 	errors.New("New Error")
+	// }
+	//
+	// ***********	
 	// package gorecode
 	// 
 	// import (
@@ -34,4 +51,7 @@ func ExampleAddAfterLine(){
 	// 	fmt.Println("Any")
 	// 	errors.New("New Error")
 	// }	
+
+
+
 }
