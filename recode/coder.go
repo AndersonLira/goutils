@@ -24,6 +24,9 @@ func MakeCoder(filePath string) (Coder, error) {
 
 	coder.FilePath = filePath
 	coder.Lines = strings.Split(content,"\r\n")
+	if(len(coder.Lines) == 1) {
+		coder.Lines = strings.Split(content,"\n")
+	}
 	return coder,nil
 
 }
