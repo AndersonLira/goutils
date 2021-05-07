@@ -17,7 +17,7 @@ func ListFiles(root string, extensions []string) (files []string, err error){
         }
 
         for _,ext := range extensions {
-            if strings.HasSuffix(path, ext){
+            if strings.HasSuffix(path, "." + ext){
                 files = append(files, path)
                 return nil
             }
