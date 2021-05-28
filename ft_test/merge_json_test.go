@@ -21,12 +21,15 @@ func TestMergeFiles(t *testing.T) {
 	result, _ := ft.MergeJson(jsonWeak,jsonStrong)
 
 	if len(result.NewKeys) != 4 {
-		t.Errorf("NewKeys should be 4, but %v",len(result.NewKeys))
+		t.Errorf("NewKeys size should be 4, but %v",len(result.NewKeys))
 	}
 
 	if len(result.MissingKeys) != 1 {
-		t.Errorf("MissingKeys should be 1, but %v",len(result.MissingKeys))
+		t.Errorf("MissingKeys size should be 1, but %v",len(result.MissingKeys))
 	}
 	
+	if len(result.DiffKeys) != 2 {
+		t.Errorf("DiffKeys size should be 2, but %v",len(result.DiffKeys))
+	}
 
 }
