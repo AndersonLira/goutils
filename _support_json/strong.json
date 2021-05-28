@@ -3,5 +3,8 @@
     "e":"Ééè - changed",
     "c":"CcCc",
     "1":"1",
-    "keyOnlyHere":"ValueOnlyHere"
+    "keyOnlyHere":"ValueOnlyHere",
+    "sameValue1": "Same Value",
+    "sameValue2": "Same Value - changed"
+
 }

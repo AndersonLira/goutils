@@ -2,6 +2,8 @@ package ft
 
 import (
 	"encoding/json"
+	"fmt"
+	"regexp"
 )
 
 //MergeStatus represents the result of merge
@@ -9,6 +11,17 @@ type MergeStatus struct {
 	NewKeys map[string]string
 	MissingKeys map[string]string
 	DiffKeys []Diff
+	final string
+}
+
+func (ms MergeStatus) FinalJSON() string {
+	for _, diff := range ms.DiffKeys {
+		rgx := fmt.Sprintf(`("%s".*:.*")%s`,diff.Key,diff.WeakValue)
+		m := regexp.MustCompile(rgx)
+		repl := fmt.Sprintf("${1}%s",diff.StrongValue)
+		ms.final = m.ReplaceAllString(ms.final, repl)
+	}
+	return ms.final
 }
 
 //Diff reprents when two values are different on given values
@@ -32,7 +45,9 @@ func MergeJson(jsonStrWeak, jsonStrStrong string) (status MergeStatus, err error
 	if err != nil {
 		return MergeStatus{}, err
 	}
-	return compare(jsonWeak,jsonStrong), nil
+	status = compare(jsonWeak,jsonStrong)
+	status.final = jsonStrWeak
+	return status,nil
 }
 
 
@@ -57,5 +72,6 @@ func compare(weak, strong map[string]string) (status MergeStatus){
 			status.MissingKeys[k] = v
 		}
 	}
+
 	return status
 }

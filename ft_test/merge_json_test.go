@@ -28,8 +28,12 @@ func TestMergeFiles(t *testing.T) {
 		t.Errorf("MissingKeys size should be 1, but %v",len(result.MissingKeys))
 	}
 	
-	if len(result.DiffKeys) != 2 {
-		t.Errorf("DiffKeys size should be 2, but %v",len(result.DiffKeys))
+	if len(result.DiffKeys) != 3 {
+		t.Errorf("DiffKeys size should be 3, but %v",len(result.DiffKeys))
+	}
+	finalJson, _ := io.ReadFile("../_support_json/final.json")
+	if result.FinalJSON() != finalJson {
+		t.Errorf("Final json should be\n %s \nbut\n %s",finalJson, result.FinalJSON())
 	}
 
 }
