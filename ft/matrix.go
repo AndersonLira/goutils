@@ -22,6 +22,12 @@ func (m Matrix) Println(s string) {
 	fmt.Println(fmt.Sprintf("%s %s%s", string(m.Separator), s, string(m.Separator)))
 }
 
+//PrettyP prints with color 
+func (m Matrix) PrettyP(s string, color Color){
+	m.TextColor = color
+	m.Println(s)
+}
+
 //Line prints a line with Width width
 func (m Matrix) Line() {
 	fmt.Print(m.LineColor)
