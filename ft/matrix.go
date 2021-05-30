@@ -18,9 +18,7 @@ type Matrix struct {
 //Println prints content formatted
 func (m Matrix) Println(s string) {
 	s = strPad(s, m.Width, " ", "RIGHT")[0 : m.Width-3]
-	fmt.Print(m.TextColor)
-	fmt.Println(fmt.Sprintf("%s %s%s", string(m.Separator), s, string(m.Separator)))
-	fmt.Print(NONE)
+	fmt.Println(fmt.Sprintf("%s%s %s%s%s", string(m.Separator), m.TextColor, s, NONE, string(m.Separator)))
 }
 
 //PrettyP prints with color 
