@@ -1,5 +1,7 @@
 package ft
 
+import "fmt"
+
 type Color string
 
 //Colors for terminal
@@ -31,3 +33,7 @@ const (
 	ClrN = "\x1b[0m"
 	NONE Color = "\x1b[0m"
 )
+
+func ValueOf(c Color) string{
+	return fmt.Sprintf("%v",c)
+}
