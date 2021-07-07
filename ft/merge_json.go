@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"regexp"
+	"strings"
 )
 
 //MergeStatus represents the result of merge
@@ -16,12 +17,16 @@ type MergeStatus struct {
 
 func (ms MergeStatus) FinalJSON() string {
 	for _, diff := range ms.DiffKeys {
-		rgx := fmt.Sprintf(`("%s".*:.*")%s`,diff.Key,diff.WeakValue)
+		rgx := fmt.Sprintf(`("%s".*:.*")%s`,escape(diff.Key),diff.WeakValue)
 		m := regexp.MustCompile(rgx)
 		repl := fmt.Sprintf("${1}%s",diff.StrongValue)
 		ms.final = m.ReplaceAllString(ms.final, repl)
 	}
 	return ms.final
+}
+
+func escape(s string) string {
+	return strings.ReplaceAll(strings.ReplaceAll(s,"(","\\("),")","\\)")
 }
 
 //Diff reprents when two values are different on given values
