@@ -24,10 +24,12 @@ func (ms MergeStatus) FinalJSON() string {
 	}
 	return ms.final
 }
-
+//TODO make a independent api
 func escape(s string) string {
 	esc := strings.ReplaceAll(strings.ReplaceAll(s,"(","\\("),")","\\)")
-	return strings.ReplaceAll(strings.ReplaceAll(esc,"[","\\["),"]","\\]")
+	esc = strings.ReplaceAll(strings.ReplaceAll(esc,"[","\\["),"]","\\]")
+	esc = strings.ReplaceAll(strings.ReplaceAll(esc,"|","\\|"),"?","\\?")
+	return strings.ReplaceAll(strings.ReplaceAll(esc,".","\\."),"*","\\*")
 }
 
 //Diff reprents when two values are different on given values

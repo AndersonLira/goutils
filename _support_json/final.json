@@ -1,5 +1,7 @@
 {
     "a":"AÁÃÀ",
+    "escape key (a) [b] (c|d)":"escape value (a) [b] (c|d) changed",
+    "escape key 2 ? * .*":"escape value ? * .* changed",
     "e":"Ééè - changed (value)[value]",
     "newOther":"newOther",
     "c":"CcCc",
