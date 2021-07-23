@@ -26,10 +26,13 @@ func (ms MergeStatus) FinalJSON() string {
 }
 //TODO make a independent api
 func escape(s string) string {
-	esc := strings.ReplaceAll(strings.ReplaceAll(s,"(","\\("),")","\\)")
-	esc = strings.ReplaceAll(strings.ReplaceAll(esc,"[","\\["),"]","\\]")
-	esc = strings.ReplaceAll(strings.ReplaceAll(esc,"|","\\|"),"?","\\?")
-	return strings.ReplaceAll(strings.ReplaceAll(esc,".","\\."),"*","\\*")
+	chars := []string{"(",")","[","]","|","?",".","*","$"}
+	esc := s
+
+	for _,c := range chars {
+		esc = strings.ReplaceAll(esc,c,fmt.Sprintf("\\%s",c))
+	}
+	return esc
 }
 
 //Diff reprents when two values are different on given values

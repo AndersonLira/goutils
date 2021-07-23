@@ -1,6 +1,6 @@
 {
     "a":"AÁÃÀ",
-    "escape key (a) [b] (c|d)":"escape value (a) [b] (c|d)",
+    "escape key (a) [b] (c|d) $":"escape value (a) [b] (c|d) $",
     "escape key 2 ? * .*":"escape value ? * .*",
     "e":"Ééè s",
     "newOther":"newOther",
