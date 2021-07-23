@@ -17,7 +17,7 @@ type MergeStatus struct {
 
 func (ms MergeStatus) FinalJSON() string {
 	for _, diff := range ms.DiffKeys {
-		rgx := fmt.Sprintf(`("%s".*:.*")%s`,escape(diff.Key),diff.WeakValue)
+		rgx := fmt.Sprintf(`("%s".*:.*")%s`,escape(diff.Key),escape(diff.WeakValue))
 		m := regexp.MustCompile(rgx)
 		repl := fmt.Sprintf("${1}%s",diff.StrongValue)
 		ms.final = m.ReplaceAllString(ms.final, repl)
@@ -26,7 +26,8 @@ func (ms MergeStatus) FinalJSON() string {
 }
 
 func escape(s string) string {
-	return strings.ReplaceAll(strings.ReplaceAll(s,"(","\\("),")","\\)")
+	esc := strings.ReplaceAll(strings.ReplaceAll(s,"(","\\("),")","\\)")
+	return strings.ReplaceAll(strings.ReplaceAll(esc,"[","\\["),"]","\\]")
 }
 
 //Diff reprents when two values are different on given values
