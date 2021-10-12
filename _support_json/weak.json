@@ -10,5 +10,6 @@
     "newb":"NewB",
     "newc":"NewC",
     "sameValue1": "Same Value",
-    "sameValue ((2))": "Same Value"
+    "sameValue ((2))": "Same Value",
+    "keyWithBreakLine":"This key has no break line"
 }

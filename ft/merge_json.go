@@ -19,7 +19,7 @@ func (ms MergeStatus) FinalJSON() string {
 	for _, diff := range ms.DiffKeys {
 		rgx := fmt.Sprintf(`("%s".*:.*")%s`,escape(diff.Key),escape(diff.WeakValue))
 		m := regexp.MustCompile(rgx)
-		repl := fmt.Sprintf("${1}%s",diff.StrongValue)
+		repl := fmt.Sprintf("${1}%s",preserveBreakLine(diff.StrongValue))
 		ms.final = m.ReplaceAllString(ms.final, repl)
 	}
 	return ms.final
@@ -33,6 +33,10 @@ func escape(s string) string {
 		esc = strings.ReplaceAll(esc,c,fmt.Sprintf("\\%s",c))
 	}
 	return esc
+}
+
+func preserveBreakLine(s string) string {
+	return strings.ReplaceAll(s,"\n","\\n")	
 }
 
 //Diff reprents when two values are different on given values

@@ -8,6 +8,8 @@
     "keyOnlyHere":"ValueOnlyHere",
     "sameValue1": "Same Value",
     "sameValue ((2))": 
-    "Same Value - changed"
+    "Same Value - changed",
+    "keyWithBreakLine":"This key has now \na break line"
+
 
 }
