@@ -1,6 +1,7 @@
 package watcher_test
 
 import (
+	"os"
 	"testing"
 
 	"github.com/andersonlira/goutils/io"
@@ -24,6 +25,6 @@ func TestStart(t *testing.T) {
 		t.Errorf("File changed should be ./test.txt but %s", fileChanged)
 	}
 
-	//os.Remove("./test.txt")
+	os.Remove("./test.txt")
 
 }
