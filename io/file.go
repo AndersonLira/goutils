@@ -53,3 +53,19 @@ func AppendFilef(fileName string, content string, args ...interface{}) error {
 	s := fmt.Sprintf(content, args...)
 	return AppendFile(fileName, s)
 }
+
+//CopyFile make a copy from a file.
+func CopyFile(src, dest string) error {
+	bytesRead, err := ioutil.ReadFile(src)
+
+	if err != nil {
+		return err
+	}
+
+	err = ioutil.WriteFile(dest, bytesRead, 0644)
+
+	if err != nil {
+		return err
+	}
+	return nil
+}

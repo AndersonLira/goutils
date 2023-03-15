@@ -7,6 +7,7 @@ import (
 	"strings"
 	"testing"
 	"time"
+
 	"github.com/andersonlira/goutils/io"
 )
 
@@ -84,9 +85,30 @@ func TestAppendFilef(t *testing.T) {
 	}
 }
 
-func getFileName() (string){
+func TestCopyFile(t *testing.T) {
+	src := "./tmp.txt"
+	dest := "./tmp-copy.txt"
+	txt := "tmp1"
+	io.WriteFile(src, txt)
+	err := io.CopyFile(src, dest)
+
+	if err != nil {
+		t.Fatalf("Error should be nil but %v", err)
+	}
+
+	copy, err := io.ReadFile(dest)
+
+	if txt != copy {
+		t.Fatalf("copy should contain %s, but was %s", txt, copy)
+	}
+
+	os.Remove(src)
+	os.Remove(dest)
+}
+
+func getFileName() string {
 	r := rand.New(rand.NewSource(time.Now().UnixNano()))
 	prefix := os.TempDir()
-	fileName := fmt.Sprintf("%s%s%dTestAppendFile.txt",prefix,string(os.PathSeparator), r.Int())
+	fileName := fmt.Sprintf("%s%s%dTestAppendFile.txt", prefix, string(os.PathSeparator), r.Int())
 	return fileName
 }
